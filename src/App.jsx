@@ -11,19 +11,20 @@ function Home({ projects }) {
   return (
     <main className="gallery-wrap">
       {projects.length === 0 && (
-        <p className="center">
-          No images
-         
-        </p>
+        <p className="center">No images</p>
       )}
 
       <div className="projects-grid">
         {projects.map((proj) => (
-          <Link key={proj.name} to={`/project/${proj.name}`} className="project-card">
+          <Link
+            key={proj.name}
+            to={`${import.meta.env.BASE_URL}project/${proj.name}`}
+            className="project-card"
+          >
             {proj.images.length > 0 && (
               <img
                 loading="lazy"
-                src={proj.images[0].src}
+                src={`${import.meta.env.BASE_URL}${proj.images[0].src}`}
                 alt={proj.name}
               />
             )}
@@ -37,11 +38,9 @@ function Home({ projects }) {
 function ProjectPage({ projects }) {
   const { name } = useParams();
   const project = projects.find(p => p.name === name);
-  const [modalImg, setModalImg] = useState(null); // imagem aberta no modal
+  const [modalImg, setModalImg] = useState(null);
 
-  if (!project) {
-    return <p className="center">Projeto não encontrado</p>;
-  }
+  if (!project) return <p className="center">Projeto não encontrado</p>;
 
   return (
     <main className="gallery-wrap">
@@ -52,18 +51,17 @@ function ProjectPage({ projects }) {
           <img
             key={img.filename}
             loading="lazy"
-            src={img.src}
+            src={`${import.meta.env.BASE_URL}${img.src}`}
             alt={img.filename}
-            onClick={() => setModalImg(img.src)} // abre modal
+            onClick={() => setModalImg(`${import.meta.env.BASE_URL}${img.src}`)}
           />
         ))}
       </div>
 
       <div className="center">
-        <Link to="/" className="back-link">← Voltar</Link>
+        <Link to={`${import.meta.env.BASE_URL}`} className="back-link">← Voltar</Link>
       </div>
 
-      {/* Modal */}
       {modalImg && (
         <div className="modal" onClick={() => setModalImg(null)}>
           <img src={modalImg} alt="Visualização" />
@@ -73,7 +71,6 @@ function ProjectPage({ projects }) {
   );
 }
 
-// Nova página de contatos
 function ContactsPage() {
   return (
     <main className="gallery-wrap contacts">
@@ -82,9 +79,7 @@ function ContactsPage() {
         Instagram: <a href="https://www.instagram.com/kostandstenko" target="_blank" rel="noopener noreferrer">@kostandstenko</a>
       </p>
       <p>
-        Email: <a href="mailto:kostandstenko@gmail.com
-
-">kostandstenko@gmail.com</a>
+        Email: <a href="mailto:kostandstenko@gmail.com">kostandstenko@gmail.com</a>
       </p>
     </main>
   );
@@ -94,18 +89,18 @@ export default function App() {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    fetch('/images/images.json')
+    fetch(`${import.meta.env.BASE_URL}images/images.json`)
       .then(r => r.json())
       .then(setProjects)
       .catch(() => setProjects([]));
   }, []);
 
   return (
-    <Router>
+    <Router basename={import.meta.env.BASE_URL}>
       <header className="site-header">
-        <h1><Link to="/">ANNA KOSTENKO</Link></h1>
+        <h1><Link to={`${import.meta.env.BASE_URL}`}>ANNA KOSTENKO</Link></h1>
         <nav className="nav-links">
-          <Link to="/contacts">Contacts</Link>
+          <Link to={`${import.meta.env.BASE_URL}contacts`}>Contacts</Link>
         </nav>
       </header>
 
