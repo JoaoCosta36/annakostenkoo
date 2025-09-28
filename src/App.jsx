@@ -1,0 +1,123 @@
+import React, { useEffect, useState } from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useParams
+} from 'react-router-dom';
+
+function Home({ projects }) {
+  return (
+    <main className="gallery-wrap">
+      {projects.length === 0 && (
+        <p className="center">
+          No images
+         
+        </p>
+      )}
+
+      <div className="projects-grid">
+        {projects.map((proj) => (
+          <Link key={proj.name} to={`/project/${proj.name}`} className="project-card">
+            {proj.images.length > 0 && (
+              <img
+                loading="lazy"
+                src={proj.images[0].src}
+                alt={proj.name}
+              />
+            )}
+          </Link>
+        ))}
+      </div>
+    </main>
+  );
+}
+
+function ProjectPage({ projects }) {
+  const { name } = useParams();
+  const project = projects.find(p => p.name === name);
+  const [modalImg, setModalImg] = useState(null); // imagem aberta no modal
+
+  if (!project) {
+    return <p className="center">Projeto não encontrado</p>;
+  }
+
+  return (
+    <main className="gallery-wrap">
+      <h2 className="project-heading">{project.name}</h2>
+
+      <div className="project-gallery">
+        {project.images.map(img => (
+          <img
+            key={img.filename}
+            loading="lazy"
+            src={img.src}
+            alt={img.filename}
+            onClick={() => setModalImg(img.src)} // abre modal
+          />
+        ))}
+      </div>
+
+      <div className="center">
+        <Link to="/" className="back-link">← Voltar</Link>
+      </div>
+
+      {/* Modal */}
+      {modalImg && (
+        <div className="modal" onClick={() => setModalImg(null)}>
+          <img src={modalImg} alt="Visualização" />
+        </div>
+      )}
+    </main>
+  );
+}
+
+// Nova página de contatos
+function ContactsPage() {
+  return (
+    <main className="gallery-wrap contacts">
+      <h2 className="project-heading">Contacts</h2>
+      <p>
+        Instagram: <a href="https://www.instagram.com/kostandstenko" target="_blank" rel="noopener noreferrer">@kostandstenko</a>
+      </p>
+      <p>
+        Email: <a href="mailto:kostandstenko@gmail.com
+
+">kostandstenko@gmail.com</a>
+      </p>
+    </main>
+  );
+}
+
+export default function App() {
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    fetch('/images/images.json')
+      .then(r => r.json())
+      .then(setProjects)
+      .catch(() => setProjects([]));
+  }, []);
+
+  return (
+    <Router>
+      <header className="site-header">
+        <h1><Link to="/">ANNA KOSTENKO</Link></h1>
+        <nav className="nav-links">
+          <Link to="/contacts">Contacts</Link>
+        </nav>
+      </header>
+
+      <Routes>
+        <Route path="/" element={<Home projects={projects} />} />
+        <Route path="/project/:name" element={<ProjectPage projects={projects} />} />
+        <Route path="/contacts" element={<ContactsPage />} />
+      </Routes>
+
+      <footer className="site-footer">
+        <small>Made with ❤️</small>
+      </footer>
+    </Router>
+  );
+}
