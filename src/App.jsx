@@ -18,7 +18,7 @@ function Home({ projects }) {
         {projects.map((proj) => (
           <Link
             key={proj.name}
-            to={`${import.meta.env.BASE_URL}project/${proj.name}`}
+            to={`/project/${proj.name}`}
             className="project-card"
           >
             {proj.images.length > 0 && (
@@ -59,7 +59,7 @@ function ProjectPage({ projects }) {
       </div>
 
       <div className="center">
-        <Link to={`${import.meta.env.BASE_URL}`} className="back-link">← Voltar</Link>
+        <Link to="/" className="back-link">← Voltar</Link>
       </div>
 
       {modalImg && (
@@ -98,9 +98,9 @@ export default function App() {
   return (
     <Router basename={import.meta.env.BASE_URL}>
       <header className="site-header">
-        <h1><Link to={`${import.meta.env.BASE_URL}`}>ANNA KOSTENKO</Link></h1>
+        <h1><Link to="/">ANNA KOSTENKO</Link></h1>
         <nav className="nav-links">
-          <Link to={`${import.meta.env.BASE_URL}contacts`}>Contacts</Link>
+          <Link to="/contacts">Contacts</Link>
         </nav>
       </header>
 
@@ -108,6 +108,7 @@ export default function App() {
         <Route path="/" element={<Home projects={projects} />} />
         <Route path="/project/:name" element={<ProjectPage projects={projects} />} />
         <Route path="/contacts" element={<ContactsPage />} />
+        <Route path="*" element={<p className="center">Page not found</p>} />
       </Routes>
 
       <footer className="site-footer">
