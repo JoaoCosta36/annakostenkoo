@@ -3,21 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://joaocosta36.github.io/annakostenkoo",
-"scripts": {
-  "dev": "vite",
-  "build": "vite build",
-  "preview": "vite preview",
-  "deploy": "gh-pages -d dist"
-}
-,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
+  },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.17.0"
   },
   "devDependencies": {
-    "vite": "^5.1.0",
     "@vitejs/plugin-react": "^4.3.1",
-    "gh-pages": "^5.0.0"
+    "gh-pages": "^5.0.0",
+    "vite": "^5.1.0"
   }
 }

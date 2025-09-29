@@ -6,13 +6,12 @@ import {
   Link,
   useParams
 } from 'react-router-dom';
+import './styles.css';
 
 function Home({ projects }) {
   return (
     <main className="gallery-wrap">
-      {projects.length === 0 && (
-        <p className="center">No images</p>
-      )}
+      {projects.length === 0 && <p className="center">No images</p>}
 
       <div className="projects-grid">
         {projects.map((proj) => (
@@ -26,6 +25,7 @@ function Home({ projects }) {
                 loading="lazy"
                 src={`${import.meta.env.BASE_URL}${proj.images[0].src}`}
                 alt={proj.name}
+                className="project-image"
               />
             )}
           </Link>
@@ -59,7 +59,7 @@ function ProjectPage({ projects }) {
       </div>
 
       <div className="center">
-        <Link to="/" className="back-link">← Voltar</Link>
+        <Link to="/" className="back-link">← Back</Link>
       </div>
 
       {modalImg && (
@@ -76,11 +76,22 @@ function ContactsPage() {
     <main className="gallery-wrap contacts">
       <h2 className="project-heading">Contacts</h2>
       <p>
-        Instagram: <a href="https://www.instagram.com/kostandstenko" target="_blank" rel="noopener noreferrer">@kostandstenko</a>
+        Instagram:{" "}
+        <a href="https://www.instagram.com/kostandstenko" target="_blank" rel="noopener noreferrer">@kostandstenko</a>
       </p>
       <p>
         Email: <a href="mailto:kostandstenko@gmail.com">kostandstenko@gmail.com</a>
       </p>
+      <p>
+        My Interview:
+       <a
+          href="https://youtu.be/-Tr1MvK7lKk"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Video
+        </a>
+        </p>
     </main>
   );
 }
@@ -112,7 +123,12 @@ export default function App() {
       </Routes>
 
       <footer className="site-footer">
-        <small>Made with ❤️</small>
+        <small>
+    Made with ❤️ by{' '}
+    <a href="https://www.instagram.com/joaocosta36" target="_blank" rel="noopener noreferrer">
+      João Costa
+    </a>
+  </small>
       </footer>
     </Router>
   );
