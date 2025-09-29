@@ -125,7 +125,7 @@ export default function App() {
       <footer className="site-footer">
         <small>
     Made with ❤️ by{' '}
-    <a href="https://www.instagram.com/joaocosta36" target="_blank" rel="noopener noreferrer">
+    <a href="https://www.instagram.com/jps.costa" target="_blank" rel="noopener noreferrer">
       João Costa
     </a>
   </small>
