@@ -77,21 +77,36 @@ function ContactsPage() {
       <h2 className="project-heading">Contacts</h2>
       <p>
         Instagram:{" "}
-        <a href="https://www.instagram.com/kostandstenko" target="_blank" rel="noopener noreferrer">@kostandstenko</a>
+        <a
+          href="https://www.instagram.com/kostandstenko"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          @kostandstenko
+        </a>
       </p>
       <p>
         Email: <a href="mailto:kostandstenko@gmail.com">kostandstenko@gmail.com</a>
       </p>
       <p>
-        My Interview:
-       <a
+        My Interview:{" "}
+        <a
           href="https://youtu.be/-Tr1MvK7lKk"
           target="_blank"
           rel="noopener noreferrer"
         >
           Video
         </a>
-        </p>
+      </p>
+
+      {/* Contact Image */}
+      <div className="contact-image-wrapper">
+        <img
+          src={`${import.meta.env.BASE_URL}images/contact_image.jpg`}
+          alt="Contact"
+          className="contact-image"
+        />
+      </div>
     </main>
   );
 }

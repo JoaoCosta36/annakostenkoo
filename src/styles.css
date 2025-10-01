@@ -257,3 +257,23 @@ a {
 .gallery-wrap.contacts a:active {
   color: #ccc;
 }
+.contact-image-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.contact-image {
+  max-width: 90%;
+  max-height: 50vh;   /* ocupa no máximo metade da altura da viewport */
+  height: auto;
+  width: auto;
+  object-fit: contain;
+  border-radius: 12px;
+}
+.gallery-wrap.contacts {
+  padding: 70px 20px 30px;  /* menos espaço acima */
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
